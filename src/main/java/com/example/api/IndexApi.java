@@ -10,9 +10,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Administrator
@@ -20,16 +18,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class IndexApi {
-    @GetMapping("/")
+    @GetMapping(value="/")
     public String home(){
         return "redirect:/index";
     }
 
-    @GetMapping("/index")
+    @GetMapping(value = "/index")
     public String index(Model model){
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         model.addAttribute("user",user);
         return "admin/index";
+    }
+
+    @PatchMapping  //更新一个资源的某个部份
+    @PutMapping  //全量更新一个资源
+    @DeleteMapping //删除资源
+    @GetMapping  //获得资源
+    @PostMapping //创建一个资源
+    public void test(){
+
     }
 
     @GetMapping("/login")
